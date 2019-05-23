@@ -1,0 +1,23 @@
+{
+  "name": "okrobot-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "browserify": "npx browserify build.js -o ./dist/okrobot.js -t [ babelify --presets[@babel/preset-env]]",
+    "uglify": "npx uglifyjs ./dist/okrobot.js -o ./dist/okrobot-min.js",
+    "dist": "npm run browserify && npm run uglify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "uglify-es": "^3.3.9"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}

@@ -1,0 +1,1 @@
+window.okrobot = okrobot = require("./index.js");
