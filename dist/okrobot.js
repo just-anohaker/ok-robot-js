@@ -763,13 +763,14 @@ async function get(userId) {
   return result;
 }
 
-async function add(groupName, name, apiKey, apiSecret) {
+async function add(groupName, name, httpKey, httpSecret, passphrase) {
   let result;
   const data = {
     groupName,
     name,
-    apiKey,
-    apiSecret
+    httpKey,
+    httpSecret,
+    passphrase
   };
 
   if (platform.isElectronPlatform()) {
@@ -801,8 +802,9 @@ async function remove(userId) {
 async function update(userId, {
   groupName,
   name,
-  apiKey,
-  apiSecret
+  httpKey,
+  httpSecret,
+  passphrase
 } = {}) {
   let result;
   const data = {
@@ -810,8 +812,9 @@ async function update(userId, {
     options: {
       groupName,
       name,
-      apiKey,
-      apiSecret
+      httpKey,
+      httpSecret,
+      passphrase
     }
   };
 
