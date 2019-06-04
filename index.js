@@ -4,5 +4,9 @@ module.exports = {
     isElectronPlatform,
     config: require("./lib/config"),
     eventbus: require("./lib/platform/event-bus"),
-    user: require("./lib/user.js")
+    user: require("./lib/user.js"),
+    auto_maker: require("./lib/auto_maker"),
+    auto_market: require("./lib/auto_market"),
+    batch_order: require("./lib/batch_order"),
+    take_order: require("./lib/take_order")
 };
