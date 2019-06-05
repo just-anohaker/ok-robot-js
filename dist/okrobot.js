@@ -124,9 +124,9 @@ const config = require("./config");
 /**
  * 
  * @param {object} options 
- * @param {number} options.topPrice - 交易最高价
- * @param {number} options.bottomPrice - 交易最低价
- * @param {number} options.costLimit - 成本上限
+ * @param {number} options.type - 交易方案
+ * @param {number} options.startSize - 触发数量
+ * @param {number} options.isCancel - 是否撤销
  * @param {object} account 
  * @param {string} account.name - 账号名字
  * @param {string} account.httpKey - httpKey
@@ -223,8 +223,8 @@ const config = require("./config");
  * @param {number} options.topPrice - 交易最高价
  * @param {number} options.startPrice - 交易最低价
  * @param {number} options.incr -  价格增量百分比
- * @param {number} options.topSize - 单笔交易数量
- * @param {number} options.count - 挂单数量
+ * @param {number} options.size - 挂单数量
+ * @param {number} options.sizeIncr - 数量递增百分比
  * @param {object} account 
  * @param {string} account.name - username
  * @param {string} account.httpKey - httpKey
@@ -270,10 +270,41 @@ async function start(oids) {
   console.log("[batchorder.start] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {object} options 
+ * @param {number} options.type - 1: 买入; 2: 卖出
+ * @param {number} options.topPrice - 交易最高价
+ * @param {number} options.startPrice - 交易最低价
+ * @param {object} account 
+ * @param {string} account.name - username
+ * @param {string} account.httpKey - httpKey
+ * @param {string} account.httpSecret - httpSecret
+ * @param {string} account.passphrase -  passphrase
+ */
+
+
+async function cancel(options, account) {
+  let result;
+  const data = {
+    options,
+    account
+  };
+
+  if (platform.isElectronPlatform()) {
+    result = await platform.calllocal("batchorder.cancel", data);
+  } else {
+    result = await platform.postremote(`${config.hostname}/api/batch_order/cancel`, data);
+  }
+
+  console.log("[batchorder.cancel] response:", JSON.stringify(result));
+  return result;
+}
 
 module.exports = {
   generate,
-  start
+  start,
+  cancel
 };
 
 },{"./config":6,"./platform":8}],6:[function(require,module,exports){
