@@ -248,28 +248,22 @@ async function generate(options, account) {
 
   console.log("[batchorder.generate] response:", JSON.stringify(result));
   return result;
-}
-/**
- * 
- * @param {array<string>} oids - order ids
- */
+} // /**
+//  * 
+//  * @param {array<string>} oids - order ids
+//  */
+// async function start(oids) {
+//     let result;
+//     const data = { client_oids: oids };
+//     if (platform.isElectronPlatform()) {
+//         result = await platform.calllocal("batchorder.start", data);
+//     } else {
+//         result = await platform.postremote(`${config.hostname}/api/batch_order`, data);
+//     }
+//     console.log("[batchorder.start] response:", JSON.stringify(result));
+//     return result;
+// }
 
-
-async function start(oids) {
-  let result;
-  const data = {
-    client_oids: oids
-  };
-
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("batchorder.start", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/batch_order`, data);
-  }
-
-  console.log("[batchorder.start] response:", JSON.stringify(result));
-  return result;
-}
 /**
  * 
  * @param {object} options 
@@ -300,11 +294,73 @@ async function cancel(options, account) {
   console.log("[batchorder.cancel] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {object} options 
+ * @param {number} options.type - 1: 买入;  2: 卖出
+ * @param {number} options.price - 价格
+ * @param {number} options.size - 数量
+ * @param {object} account 
+ * @param {string} account.name - username
+ * @param {string} account.httpKey - httpKey
+ * @param {string} account.httpSecret - httpSecret
+ * @param {string} account.passphrase -  passphrase
+ */
+
+
+async function limitOrder(options, account) {
+  let result;
+  const data = {
+    options,
+    account
+  };
+
+  if (platform.isElectronPlatform()) {
+    result = await platform.calllocal("batchorder.limitOrder", data);
+  } else {
+    result = await platform.postremote(`${config.hostname}/api/batch_order/limitOrder`, data);
+  }
+
+  console.log("[batchorder.limitOrder] response:", JSON.stringify(result));
+  return result;
+}
+/**
+ * 
+ * @param {object} options 
+ * @param {number} options.type - 1: 买入; 2: 卖出
+ * @param {number} options.notional - 买入时的金额
+ * @param {number} options.size - 卖出时的数量
+ * @param {object} account 
+ * @param {string} account.name - username
+ * @param {string} account.httpKey - httpKey
+ * @param {string} account.httpSecret - httpSecret
+ * @param {string} account.passphrase -  passphrase
+ */
+
+
+async function marketOrder(options, account) {
+  let result;
+  const data = {
+    options,
+    account
+  };
+
+  if (platform.isElectronPlatform()) {
+    result = await platform.calllocal("batchorder.marketOrder", data);
+  } else {
+    result = await platform.postremote(`${config.hostname}/api/batch_order/marketOrder`, data);
+  }
+
+  console.log("[batchorder.marketOrder] response:", JSON.stringify(result));
+  return result;
+}
 
 module.exports = {
   generate,
-  start,
-  cancel
+  // start,
+  cancel,
+  limitOrder,
+  marketOrder
 };
 
 },{"./config":6,"./platform":8}],6:[function(require,module,exports){
