@@ -554,7 +554,7 @@ class ElectronEventBus extends EventBus {
       return;
     }
 
-    const handler = this._generateEventHandler();
+    const handler = this._generateEventHandler(eventName);
 
     window.electronIpcRenderer.on(eventName, handler);
 
@@ -569,10 +569,10 @@ class ElectronEventBus extends EventBus {
     }
   }
 
-  _generateEventHandler() {
+  _generateEventHandler(eventName) {
     const self = this;
     return (event, data) => {
-      self.emit(event, data);
+      self.emit(eventName, data);
     };
   }
 
