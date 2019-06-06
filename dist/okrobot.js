@@ -956,8 +956,8 @@ async function add(groupName, name, httpKey, httpSecret, passphrase) {
     const data = {
       groupName,
       name,
-      httpKey,
-      httpSecret,
+      httpkey: httpKey,
+      httpsecret: httpSecret,
       passphrase
     };
 
@@ -1000,8 +1000,8 @@ async function remove(userId) {
 async function update(userId, {
   groupName,
   name,
-  httpKey,
-  httpSecret,
+  httpkey,
+  httpsecret,
   passphrase
 } = {}) {
   let result;
@@ -1012,8 +1012,8 @@ async function update(userId, {
       options: {
         groupName,
         name,
-        httpKey,
-        httpSecret,
+        httpkey,
+        httpsecret,
         passphrase
       }
     };
