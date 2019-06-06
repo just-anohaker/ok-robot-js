@@ -449,7 +449,7 @@ async function startDepInfo(account) {
     };
 
     if (platform.isElectronPlatform()) {
-      result = await platform.calllocal("batchorder.startDepInfo", data);
+      result = await platform.calllocal("batchorder.startDepthInfo", data);
     } else {
       result = await platform.postremote(`${config.hostname}/api/batch_order/startDepInfo`, data);
     }
