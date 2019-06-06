@@ -546,19 +546,34 @@ class EventBus {
 class ElectronEventBus extends EventBus {
   constructor() {
     super();
-    this.electronEventHandler = this._electronEventHandler.bind(this);
+    this._handlers = new Map();
   }
 
   _on(eventName) {
-    window.electronIpcRenderer.on(eventName, this.electronEventHandler);
+    if (this._handlers.has(eventName)) {
+      return;
+    }
+
+    const handler = this._electronEventHandler(eventName);
+
+    window.electronIpcRenderer.on(eventName, handler);
+
+    this._handlers.set(eventName, handler);
   }
 
   _remove(eventName) {
-    window.electronIpcRenderer.removeListener(eventName, this.electronEventHandler);
+    const handler = this._handlers.get(eventName);
+
+    if (handler) {
+      window.electronIpcRenderer.removeListener(eventName, handler);
+    }
   }
 
-  _electronEventHandler(eventName, body) {
-    this.emit(eventName, body);
+  _electronEventHandler(eventName) {
+    const self = this;
+    return body => {
+      self.emit(eventName, body);
+    };
   }
 
 }
