@@ -430,13 +430,45 @@ async function marketOrder(options, account) {
   console.log("[batchorder.marketOrder] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {*} account 
+ * @param {string} account.name - username
+ * @param {string} account.httpKey - httpKey
+ * @param {string} account.httpSecret - httpSecret
+ * @param {string} account.passphrase -  passphrase
+ */
+
+
+async function startDepInfo(account) {
+  let result;
+
+  try {
+    const data = {
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.startDepInfo", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/startDepInfo`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.startDepInfo] exception:", error);
+    throw error;
+  }
+
+  console.log("[batchorder.startDepInfo] response:", JSON.stringify(result));
+  return result;
+}
 
 module.exports = {
   generate,
   // start,
   cancel,
   limitOrder,
-  marketOrder
+  marketOrder,
+  startDepInfo
 };
 
 },{"./config":6,"./platform":8}],6:[function(require,module,exports){
