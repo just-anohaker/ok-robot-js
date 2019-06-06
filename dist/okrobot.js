@@ -42,15 +42,21 @@ const config = require("./config");
 
 async function init(options, account) {
   let result;
-  const data = {
-    options,
-    account
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automaker.init", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_maker`, data);
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automaker.init", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_maker`, data);
+    }
+  } catch (error) {
+    console.log("[automaker.init] exception:", error);
+    throw error;
   }
 
   console.log("[automaker.init] response:", JSON.stringify(result));
@@ -60,10 +66,15 @@ async function init(options, account) {
 async function start() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automaker.start");
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_maker/start`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automaker.start");
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_maker/start`);
+    }
+  } catch (error) {
+    console.log("[automaker.start] exception:", error);
+    throw error;
   }
 
   console.log("[automaker.start] response:", JSON.stringify(result));
@@ -73,10 +84,15 @@ async function start() {
 async function stop() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automaker.stop");
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_maker/stop`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automaker.stop");
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_maker/stop`);
+    }
+  } catch (error) {
+    console.log("[automaker.stop] exception:", error);
+    throw error;
   }
 
   console.log("[automaker.stop] response:", JSON.stringify(result));
@@ -86,10 +102,15 @@ async function stop() {
 async function isRunning() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automaker.isRunning");
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_maker/isRunning`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automaker.isRunning");
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_maker/isRunning`);
+    }
+  } catch (error) {
+    console.log("[automaker.isRunning] exception:", error);
+    throw error;
   }
 
   console.log("[automaker.isRunning] response: ", JSON.stringify(result));
@@ -99,10 +120,15 @@ async function isRunning() {
 async function getOptionsAndAccount() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automaker.getOptionsAndAccount");
-  } else {
-    result = await platform.getremote(`${config.hostname}/api/auto_maker`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automaker.getOptionsAndAccount");
+    } else {
+      result = await platform.getremote(`${config.hostname}/api/auto_maker`);
+    }
+  } catch (error) {
+    console.log("[automaker.getOptionsAndAccount] exception:", error);
+    throw error;
   }
 
   console.log("[automaker.getOptionsAndAccount] response:", JSON.stringify(result));
@@ -137,15 +163,21 @@ const config = require("./config");
 
 async function init(options, account) {
   let result;
-  const data = {
-    options,
-    account
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automarket.init", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_market`, data);
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automarket.init", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_market`, data);
+    }
+  } catch (error) {
+    console.log("[automarket.init] exception:", error);
+    throw error;
   }
 
   console.log("[automarket.init] response:", JSON.stringify(result));
@@ -155,10 +187,15 @@ async function init(options, account) {
 async function start() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automarket.start");
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_market/start`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automarket.start");
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_market/start`);
+    }
+  } catch (error) {
+    console.log("[automarket.start] exception:", error);
+    throw error;
   }
 
   console.log("[automarket.start] response:", JSON.stringify(result));
@@ -168,10 +205,15 @@ async function start() {
 async function stop() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automarket.stop");
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_market/stop`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automarket.stop");
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_market/stop`);
+    }
+  } catch (error) {
+    console.log("[automarket.stop] exception:", error);
+    throw error;
   }
 
   console.log("[automarket.stop] response:", JSON.stringify(result));
@@ -181,10 +223,15 @@ async function stop() {
 async function isRunning() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automarket.isRunning");
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/auto_market/isRunning`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automarket.isRunning");
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/auto_market/isRunning`);
+    }
+  } catch (error) {
+    console.log("[automarket.isRunning] exception:", error);
+    throw error;
   }
 
   console.log("[automarket.isRunning] response: ", JSON.stringify(result));
@@ -194,10 +241,15 @@ async function isRunning() {
 async function getOptionsAndAccount() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("automarket.getOptionsAndAccount");
-  } else {
-    result = await platform.getremote(`${config.hostname}/api/auto_market`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("automarket.getOptionsAndAccount");
+    } else {
+      result = await platform.getremote(`${config.hostname}/api/auto_market`);
+    }
+  } catch (error) {
+    console.log("[automarket.getOptionsAndAccount] exception:", error);
+    throw error;
   }
 
   console.log("[automarket.getOptionsAndAccount] response:", JSON.stringify(result));
@@ -235,15 +287,21 @@ const config = require("./config");
 
 async function generate(options, account) {
   let result;
-  const data = {
-    options,
-    account
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("batchorder.generate", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/batch_order/gen`, data);
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.generate", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/gen`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.generate] exception:", error);
+    throw error;
   }
 
   console.log("[batchorder.generate] response:", JSON.stringify(result));
@@ -280,15 +338,21 @@ async function generate(options, account) {
 
 async function cancel(options, account) {
   let result;
-  const data = {
-    options,
-    account
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("batchorder.cancel", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/batch_order/cancel`, data);
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.cancel", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/cancel`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.cancel] exception:", error);
+    throw error;
   }
 
   console.log("[batchorder.cancel] response:", JSON.stringify(result));
@@ -310,15 +374,21 @@ async function cancel(options, account) {
 
 async function limitOrder(options, account) {
   let result;
-  const data = {
-    options,
-    account
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("batchorder.limitOrder", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/batch_order/limitOrder`, data);
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.limitOrder", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/limitOrder`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.limitOrder] exception:", error);
+    throw error;
   }
 
   console.log("[batchorder.limitOrder] response:", JSON.stringify(result));
@@ -340,15 +410,21 @@ async function limitOrder(options, account) {
 
 async function marketOrder(options, account) {
   let result;
-  const data = {
-    options,
-    account
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("batchorder.marketOrder", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/batch_order/marketOrder`, data);
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.marketOrder", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/marketOrder`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.marketOrder] exception:", error);
+    throw error;
   }
 
   console.log("[batchorder.marketOrder] response:", JSON.stringify(result));
@@ -780,15 +856,21 @@ const config = require("./config");
 
 async function generate(options, account) {
   let result;
-  const data = {
-    options,
-    account
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("takeorder.generate", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/take_order/gen`, data);
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("takeorder.generate", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/take_order/gen`, data);
+    }
+  } catch (error) {
+    console.log("[takeorder.generate] exception:", error);
+    throw error;
   }
 
   console.log("[takeorder.generate] response:", JSON.stringify(result));
@@ -797,14 +879,20 @@ async function generate(options, account) {
 
 async function start(oids) {
   let result;
-  const data = {
-    client_oids: oids
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("takeorder.start", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/take_order`, data);
+  try {
+    const data = {
+      client_oids: oids
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("takeorder.start", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/take_order`, data);
+    }
+  } catch (error) {
+    console.log("[takeorder.start] exception:", error);
+    throw error;
   }
 
   console.log("[takeorder.start] response:", JSON.stringify(result));
@@ -824,10 +912,15 @@ const config = require("./config");
 async function getAll() {
   let result;
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("user.getall");
-  } else {
-    result = await platform.getremote(`${config.hostname}/api/user/all`);
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("user.getall");
+    } else {
+      result = await platform.getremote(`${config.hostname}/api/user/all`);
+    }
+  } catch (error) {
+    console.log("[user.getAll] exception:", error);
+    throw error;
   }
 
   console.log("[user.getAll] response:", JSON.stringify(result));
@@ -836,14 +929,20 @@ async function getAll() {
 
 async function get(userId) {
   let result;
-  const params = {
-    userId
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("user.get", params);
-  } else {
-    result = await platform.getremote(`${config.hostname}/api/user`, params);
+  try {
+    const params = {
+      userId
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("user.get", params);
+    } else {
+      result = await platform.getremote(`${config.hostname}/api/user`, params);
+    }
+  } catch (error) {
+    console.log("[user.get] exception:", error);
+    throw error;
   }
 
   console.log("[user.get] response:", JSON.stringify(result));
@@ -852,18 +951,24 @@ async function get(userId) {
 
 async function add(groupName, name, httpKey, httpSecret, passphrase) {
   let result;
-  const data = {
-    groupName,
-    name,
-    httpKey,
-    httpSecret,
-    passphrase
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("user.add", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/user`, data);
+  try {
+    const data = {
+      groupName,
+      name,
+      httpKey,
+      httpSecret,
+      passphrase
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("user.add", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/user`, data);
+    }
+  } catch (error) {
+    console.log("[user.add] exception:", error);
+    throw error;
   }
 
   console.log("[user.add] response:", JSON.stringify(result));
@@ -872,14 +977,20 @@ async function add(groupName, name, httpKey, httpSecret, passphrase) {
 
 async function remove(userId) {
   let result;
-  const data = {
-    userId
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("user.remove", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/user/remove`, data);
+  try {
+    const data = {
+      userId
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("user.remove", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/user/remove`, data);
+    }
+  } catch (error) {
+    console.log("[user.remove] exception:", error);
+    throw error;
   }
 
   console.log("[user.remove] response:", JSON.stringify(result));
@@ -894,21 +1005,27 @@ async function update(userId, {
   passphrase
 } = {}) {
   let result;
-  const data = {
-    userId,
-    options: {
-      groupName,
-      name,
-      httpKey,
-      httpSecret,
-      passphrase
-    }
-  };
 
-  if (platform.isElectronPlatform()) {
-    result = await platform.calllocal("user.update", data);
-  } else {
-    result = await platform.postremote(`${config.hostname}/api/user/update`, data);
+  try {
+    const data = {
+      userId,
+      options: {
+        groupName,
+        name,
+        httpKey,
+        httpSecret,
+        passphrase
+      }
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("user.update", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/user/update`, data);
+    }
+  } catch (error) {
+    console.log("[user.update] exception:", error);
+    throw error;
   }
 
   console.log("[user.update] response:", JSON.stringify(result));
