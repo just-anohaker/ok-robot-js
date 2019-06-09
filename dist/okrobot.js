@@ -462,13 +462,56 @@ async function startDepInfo(account) {
   return result;
 }
 
+async function stopDepInfo() {
+  let result;
+
+  try {
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.stopDepInfo", undefined);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/stopDepInfo`, undefined);
+    }
+  } catch (error) {
+    console.log("[batchorder.stopDepInfo] exception:", error);
+    throw error;
+  }
+
+  console.log("[batchorder.stopDepInfo] response:", JSON.stringify(result));
+  return result;
+}
+
+async function getOrderData(options, account) {
+  let result;
+
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.getOrderData", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/getOrderData`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.getOrderData] exception:", error);
+    throw error;
+  }
+
+  console.log("[batchorder.getOrderData] response:", JSON.stringify(result));
+  return result;
+}
+
 module.exports = {
   generate,
   // start,
   cancel,
   limitOrder,
   marketOrder,
-  startDepInfo
+  startDepInfo,
+  stopDepInfo,
+  getOrderData
 };
 
 },{"./config":6,"./platform":8}],6:[function(require,module,exports){
@@ -710,7 +753,7 @@ async function getremote(url, data = {}, timeout = 4000) {
   }
 }
 
-async function postremote(url, data = {}, timeout) {
+async function postremote(url, data = {}, timeout = 4000) {
   const axios = require("axios");
 
   try {
@@ -723,7 +766,7 @@ async function postremote(url, data = {}, timeout) {
   }
 }
 
-async function putremote(url, data = {}, timeout) {
+async function putremote(url, data = {}, timeout = 4000) {
   const axios = require("axios");
 
   try {
