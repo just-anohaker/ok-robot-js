@@ -467,7 +467,7 @@ async function stopDepInfo() {
 
   try {
     if (platform.isElectronPlatform()) {
-      result = await platform.calllocal("batchorder.stopDepInfo", undefined);
+      result = await platform.calllocal("batchorder.stopDepthInfo", undefined);
     } else {
       result = await platform.postremote(`${config.hostname}/api/batch_order/stopDepInfo`, undefined);
     }
