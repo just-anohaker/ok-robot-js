@@ -717,6 +717,8 @@ class ElectronEventBus extends EventBus {
       const handler = this._handlers.get(eventName);
 
       window.electronIpcRenderer.removeListener(eventName, handler);
+
+      this._handlers.delete(eventName);
     }
   }
 
