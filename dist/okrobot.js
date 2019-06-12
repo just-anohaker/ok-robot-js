@@ -626,6 +626,8 @@ class EventBus {
 
     if (!this._eventSet.has(eventName)) {
       this._on(eventName);
+
+      this._eventSet.add(eventName);
     }
 
     return result;
@@ -636,6 +638,8 @@ class EventBus {
 
     if (!this._eventSet.has(eventName)) {
       this._on(eventName);
+
+      this._eventSet.add(eventName);
     }
 
     return result;
@@ -646,6 +650,8 @@ class EventBus {
 
     if (!this._observable.hasEventName(eventName)) {
       this._remove(eventName);
+
+      this._eventSet.delete(eventName);
     }
 
     return result;
@@ -656,6 +662,8 @@ class EventBus {
 
     if (!this._observable.hasEventName(eventName)) {
       this._remove(eventName);
+
+      this._eventSet.delete(eventName);
     }
 
     return result;
@@ -667,6 +675,16 @@ class EventBus {
     if (!this._observable.hasEventName(event)) {
       this._remove(event);
     }
+  }
+
+  _on(eventName) {
+    void eventName;
+    throw new Error("Implemented by subclass");
+  }
+
+  _remove(eventName) {
+    void eventName;
+    throw new Error("Implemented by subclass");
   }
 
 }
@@ -682,7 +700,12 @@ class ElectronEventBus extends EventBus {
       return;
     }
 
-    const handler = this._generateEventHandler(eventName);
+    const self = this;
+
+    function handler(event, data) {
+      void event;
+      self.emit(eventName, data);
+    }
 
     window.electronIpcRenderer.on(eventName, handler);
 
@@ -695,13 +718,6 @@ class ElectronEventBus extends EventBus {
 
       window.electronIpcRenderer.removeListener(eventName, handler);
     }
-  }
-
-  _generateEventHandler(eventName) {
-    const self = this;
-    return (event, data) => {
-      self.emit(eventName, data);
-    };
   }
 
 }
@@ -727,20 +743,19 @@ class WebEventBus extends EventBus {
   _on(eventName) {
     this._checkSocketIOClient();
 
-    this._io.on(eventName, this.webEventHandler(eventName));
+    const self = this;
+
+    function handler(body) {
+      self.emit(eventName, body);
+    }
+
+    this._io.on(eventName, handler);
   }
 
   _remove(eventName) {
     this._checkSocketIOClient();
 
     this._io.off(eventName);
-  }
-
-  webEventHandler(eventName) {
-    const self = this;
-    return function handler(body) {
-      self.emit(eventName, body);
-    };
   }
 
 }
