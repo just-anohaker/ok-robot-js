@@ -681,7 +681,7 @@ async function getSpotTrade(options) {
     if (platform.isElectronPlatform()) {
       result = await platform.calllocal("okex_utils.getSpotTrade", data);
     } else {
-      result = await platform.postremote(`${config.hostname}/api/batch_order/getTradeData`, data);
+      result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotTrade`, data);
     }
   } catch (error) {
     console.log("[okex_utils.getSpotTrade] exception:", error);
@@ -689,6 +689,28 @@ async function getSpotTrade(options) {
   }
 
   console.log("[okex_utils.getSpotTrade] response:", JSON.stringify(result));
+  return result;
+}
+
+async function getSpotTicker(options) {
+  let result;
+
+  try {
+    const data = {
+      options
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("okex_utils.getSpotTicker", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotTicker`, data);
+    }
+  } catch (error) {
+    console.log("[okex_utils.getSpotTicker] exception:", JSON.stringify(result));
+    throw error;
+  }
+
+  console.log("[okex_utils.getSpotTicker] response:", JSON.stringify(result));
   return result;
 }
 
@@ -703,7 +725,7 @@ async function getSpotCandles(options) {
     if (platform.isElectronPlatform()) {
       result = await platform.calllocal("okex_utils.getSpotCandles", data);
     } else {
-      result = await platform.postremote(`${config.hostname}/api/batch_order/getCandlesData`, data);
+      result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotCandles`, data);
     }
   } catch (error) {
     console.log("[okex_utils.getSpotCandles] exception:", error);
@@ -716,6 +738,7 @@ async function getSpotCandles(options) {
 
 module.exports = {
   getSpotTrade,
+  getSpotTicker,
   getSpotCandles
 };
 
