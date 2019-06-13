@@ -586,6 +586,64 @@ async function getOrderData(options, account) {
   console.log("[batchorder.getOrderData] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {object} options 
+ * @param {string} options.instrument_id - 交易对
+ * @param {string} options.channel - 频道, e.g. "spot/candle3600s"
+ */
+
+
+async function pageInfo(options) {
+  let result;
+
+  try {
+    const data = {
+      options
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.pageInfo", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/pageInfo`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.pageInfo] exception:", error);
+    throw error;
+  }
+
+  console.log("[batchorder.pageInfo] response:", JSON.stringify(result));
+  return result;
+}
+/**
+ * 
+ * @param {object} options 
+ * @param {string} options.instrument_id - 交易对
+ * @param {string} options.channel - 频道, e.g. "spot/candle3600s"
+ */
+
+
+async function pageKline(options) {
+  let result;
+
+  try {
+    const data = {
+      options
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.pageKline", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/pageKline`, data);
+    }
+  } catch (error) {
+    console.log("[batchorder.pageKline] exception:", error);
+    throw error;
+  }
+
+  console.log("[batchorder.pageKline] response:", JSON.stringify(result));
+  return result;
+}
 
 module.exports = {
   generate,
@@ -596,7 +654,9 @@ module.exports = {
   icebergOrder,
   startDepInfo,
   stopDepInfo,
-  getOrderData
+  getOrderData,
+  pageInfo,
+  pageKline
 };
 
 },{"./config":6,"./platform":8}],6:[function(require,module,exports){
