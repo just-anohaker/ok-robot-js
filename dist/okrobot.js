@@ -710,14 +710,10 @@ async function getSpotCandles(options) {
   let result;
 
   try {
-    const data = {
-      options
-    };
-
     if (platform.isElectronPlatform()) {
-      result = await platform.calllocal("okex_utils.getSpotCandles", data);
+      result = await platform.calllocal("okex_utils.getSpotCandles", options);
     } else {
-      result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotCandles`, data);
+      result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotCandles`, options);
     }
   } catch (error) {
     console.log("[okex_utils.getSpotCandles] exception:", error);
