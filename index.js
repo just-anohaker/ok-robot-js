@@ -8,5 +8,6 @@ module.exports = {
     auto_maker: require("./lib/auto_maker"),
     auto_market: require("./lib/auto_market"),
     batch_order: require("./lib/batch_order"),
-    take_order: require("./lib/take_order")
+    take_order: require("./lib/take_order"),
+    okex_utils: require("./lib/okex_utils")
 };
