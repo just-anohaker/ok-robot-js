@@ -15,10 +15,11 @@ module.exports = {
   auto_market: require("./lib/auto_market"),
   batch_order: require("./lib/batch_order"),
   take_order: require("./lib/take_order"),
-  okex_utils: require("./lib/okex_utils")
+  okex_utils: require("./lib/okex_utils"),
+  okex_monitor: require("./lib/okex_monitor")
 };
 
-},{"./lib/auto_maker":3,"./lib/auto_market":4,"./lib/batch_order":5,"./lib/config":6,"./lib/okex_utils":7,"./lib/platform":9,"./lib/platform/event-bus":8,"./lib/take_order":11,"./lib/user.js":12}],3:[function(require,module,exports){
+},{"./lib/auto_maker":3,"./lib/auto_market":4,"./lib/batch_order":5,"./lib/config":6,"./lib/okex_monitor":7,"./lib/okex_utils":8,"./lib/platform":10,"./lib/platform/event-bus":9,"./lib/take_order":12,"./lib/user.js":13}],3:[function(require,module,exports){
 const platform = require("./platform");
 
 const config = require("./config");
@@ -56,11 +57,11 @@ async function init(options, account) {
       result = await platform.postremote(`${config.hostname}/api/auto_maker`, data);
     }
   } catch (error) {
-    console.log("[automaker.init] exception:", error);
+    config.logEnabled && console.log("[automaker.init] exception:", error);
     throw error;
   }
 
-  console.log("[automaker.init] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automaker.init] response:", JSON.stringify(result));
   return result;
 }
 
@@ -74,11 +75,11 @@ async function start() {
       result = await platform.postremote(`${config.hostname}/api/auto_maker/start`);
     }
   } catch (error) {
-    console.log("[automaker.start] exception:", error);
+    config.logEnabled && console.log("[automaker.start] exception:", error);
     throw error;
   }
 
-  console.log("[automaker.start] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automaker.start] response:", JSON.stringify(result));
   return result;
 }
 
@@ -92,11 +93,11 @@ async function stop() {
       result = await platform.postremote(`${config.hostname}/api/auto_maker/stop`);
     }
   } catch (error) {
-    console.log("[automaker.stop] exception:", error);
+    config.logEnabled && console.log("[automaker.stop] exception:", error);
     throw error;
   }
 
-  console.log("[automaker.stop] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automaker.stop] response:", JSON.stringify(result));
   return result;
 }
 
@@ -110,11 +111,11 @@ async function isRunning() {
       result = await platform.postremote(`${config.hostname}/api/auto_maker/isRunning`);
     }
   } catch (error) {
-    console.log("[automaker.isRunning] exception:", error);
+    config.logEnabled && console.log("[automaker.isRunning] exception:", error);
     throw error;
   }
 
-  console.log("[automaker.isRunning] response: ", JSON.stringify(result));
+  config.logEnabled && console.log("[automaker.isRunning] response: ", JSON.stringify(result));
   return result;
 }
 
@@ -128,11 +129,11 @@ async function getOptionsAndAccount() {
       result = await platform.getremote(`${config.hostname}/api/auto_maker`);
     }
   } catch (error) {
-    console.log("[automaker.getOptionsAndAccount] exception:", error);
+    config.logEnabled && console.log("[automaker.getOptionsAndAccount] exception:", error);
     throw error;
   }
 
-  console.log("[automaker.getOptionsAndAccount] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automaker.getOptionsAndAccount] response:", JSON.stringify(result));
   return result;
 }
 
@@ -144,7 +145,7 @@ module.exports = {
   getOptionsAndAccount
 };
 
-},{"./config":6,"./platform":9}],4:[function(require,module,exports){
+},{"./config":6,"./platform":10}],4:[function(require,module,exports){
 const platform = require("./platform");
 
 const config = require("./config");
@@ -177,11 +178,11 @@ async function init(options, account) {
       result = await platform.postremote(`${config.hostname}/api/auto_market`, data);
     }
   } catch (error) {
-    console.log("[automarket.init] exception:", error);
+    config.logEnabled && console.log("[automarket.init] exception:", error);
     throw error;
   }
 
-  console.log("[automarket.init] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automarket.init] response:", JSON.stringify(result));
   return result;
 }
 
@@ -195,11 +196,11 @@ async function start() {
       result = await platform.postremote(`${config.hostname}/api/auto_market/start`);
     }
   } catch (error) {
-    console.log("[automarket.start] exception:", error);
+    config.logEnabled && console.log("[automarket.start] exception:", error);
     throw error;
   }
 
-  console.log("[automarket.start] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automarket.start] response:", JSON.stringify(result));
   return result;
 }
 
@@ -213,11 +214,11 @@ async function stop() {
       result = await platform.postremote(`${config.hostname}/api/auto_market/stop`);
     }
   } catch (error) {
-    console.log("[automarket.stop] exception:", error);
+    config.logEnabled && console.log("[automarket.stop] exception:", error);
     throw error;
   }
 
-  console.log("[automarket.stop] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automarket.stop] response:", JSON.stringify(result));
   return result;
 }
 
@@ -231,11 +232,11 @@ async function isRunning() {
       result = await platform.postremote(`${config.hostname}/api/auto_market/isRunning`);
     }
   } catch (error) {
-    console.log("[automarket.isRunning] exception:", error);
+    config.logEnabled && console.log("[automarket.isRunning] exception:", error);
     throw error;
   }
 
-  console.log("[automarket.isRunning] response: ", JSON.stringify(result));
+  config.logEnabled && console.log("[automarket.isRunning] response: ", JSON.stringify(result));
   return result;
 }
 
@@ -249,11 +250,11 @@ async function getOptionsAndAccount() {
       result = await platform.getremote(`${config.hostname}/api/auto_market`);
     }
   } catch (error) {
-    console.log("[automarket.getOptionsAndAccount] exception:", error);
+    config.logEnabled && console.log("[automarket.getOptionsAndAccount] exception:", error);
     throw error;
   }
 
-  console.log("[automarket.getOptionsAndAccount] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[automarket.getOptionsAndAccount] response:", JSON.stringify(result));
   return result;
 }
 
@@ -265,7 +266,7 @@ module.exports = {
   getOptionsAndAccount
 };
 
-},{"./config":6,"./platform":9}],5:[function(require,module,exports){
+},{"./config":6,"./platform":10}],5:[function(require,module,exports){
 const platform = require("./platform");
 
 const config = require("./config");
@@ -302,11 +303,11 @@ async function generate(options, account) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/gen`, data);
     }
   } catch (error) {
-    console.log("[batchorder.generate] exception:", error);
+    config.logEnabled && console.log("[batchorder.generate] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.generate] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.generate] response:", JSON.stringify(result));
   return result;
 } // /**
 //  * 
@@ -354,11 +355,11 @@ async function cancel(options, account) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/cancel`, data);
     }
   } catch (error) {
-    console.log("[batchorder.cancel] exception:", error);
+    config.logEnabled && console.log("[batchorder.cancel] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.cancel] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.cancel] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -391,11 +392,11 @@ async function limitOrder(options, account) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/limitOrder`, data);
     }
   } catch (error) {
-    console.log("[batchorder.limitOrder] exception:", error);
+    config.logEnabled && console.log("[batchorder.limitOrder] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.limitOrder] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.limitOrder] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -428,11 +429,11 @@ async function marketOrder(options, account) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/marketOrder`, data);
     }
   } catch (error) {
-    console.log("[batchorder.marketOrder] exception:", error);
+    config.logEnabled && console.log("[batchorder.marketOrder] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.marketOrder] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.marketOrder] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -467,11 +468,11 @@ async function icebergOrder(options, account) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/icebergOrder`, data);
     }
   } catch (error) {
-    console.log("[batchorder.icebergOrder] exception:", error);
+    config.logEnabled && console.log("[batchorder.icebergOrder] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.icebergOrder] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.icebergOrder] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -499,11 +500,11 @@ async function startDepInfo(options) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/startDepInfo`, data);
     }
   } catch (error) {
-    console.log("[batchorder.startDepInfo] exception:", error);
+    config.logEnabled && console.log("[batchorder.startDepInfo] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.startDepInfo] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.startDepInfo] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -531,11 +532,11 @@ async function stopDepInfo(options) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/stopDepInfo`, data);
     }
   } catch (error) {
-    console.log("[batchorder.stopDepInfo] exception:", error);
+    config.logEnabled && console.log("[batchorder.stopDepInfo] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.stopDepInfo] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.stopDepInfo] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -580,11 +581,11 @@ async function getOrderData(options, account) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/getOrderData`, data);
     }
   } catch (error) {
-    console.log("[batchorder.getOrderData] exception:", error);
+    config.logEnabled && console.log("[batchorder.getOrderData] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.getOrderData] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.getOrderData] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -609,11 +610,11 @@ async function pageInfo(options) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/pageInfo`, data);
     }
   } catch (error) {
-    console.log("[batchorder.pageInfo] exception:", error);
+    config.logEnabled && console.log("[batchorder.pageInfo] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.pageInfo] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.pageInfo] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -638,11 +639,11 @@ async function pageKline(options) {
       result = await platform.postremote(`${config.hostname}/api/batch_order/pageKline`, data);
     }
   } catch (error) {
-    console.log("[batchorder.pageKline] exception:", error);
+    config.logEnabled && console.log("[batchorder.pageKline] exception:", error);
     throw error;
   }
 
-  console.log("[batchorder.pageKline] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[batchorder.pageKline] response:", JSON.stringify(result));
   return result;
 }
 
@@ -660,12 +661,161 @@ module.exports = {
   pageKline
 };
 
-},{"./config":6,"./platform":9}],6:[function(require,module,exports){
+},{"./config":6,"./platform":10}],6:[function(require,module,exports){
 module.exports = {
-  hostname: "http://localhost:1996"
+  hostname: "http://localhost:1996",
+  logEnabled: true
 };
 
 },{}],7:[function(require,module,exports){
+const platform = require("./platform");
+
+const config = require("./config");
+
+async function monitSpotTrade(instrument_id) {
+  let result;
+
+  try {
+    const data = {
+      instrument_id
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("okex_monitor.spotTrade", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/okex_monitor/spotTrade`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.monitSpotTrade] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.monitSpotTrade] response:", JSON.stringify(result));
+  return result;
+}
+
+async function unmonitSpotTrade(instrument_id) {
+  let result;
+
+  try {
+    const data = {
+      instrument_id
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("okex_monitor.spotTrade.unmonit", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/okex_monitor/spotTrade/unmonit`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.unmonitSpotTrade] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.unmonitSpotTrade] response:", JSON.stringify(result));
+  return result;
+}
+
+async function monitSpotTicker(instrument_id) {
+  let result;
+
+  try {
+    const data = {
+      instrument_id
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("okex_monitor.spotTicker", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/okex_monitor/spotTicker`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.monitSpotTicker] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.monitSpotTicker] response:", JSON.stringify(result));
+  return result;
+}
+
+async function unmonitSpotTicker(instrument_id) {
+  let result;
+
+  try {
+    const data = {
+      instrument_id
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("okex_monitor.spotTicker.unmonit", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/okex_monitor/spotTicker/unmonit`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.unmonitSpotTicker] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.unmonitSpotTicker] response:", JSON.stringify(result));
+  return result;
+}
+
+async function monitSpotChannel(channel, filter) {
+  let result;
+
+  try {
+    const data = {
+      channel_name: channel,
+      filter
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("okex_monitor.spotChannel", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/okex_monitor/spotChannel`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.monitSpotChannel] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.monitSpotChannel] response:", JSON.stringify(result));
+  return result;
+}
+
+async function unmonitSpotChannel(channel, filter) {
+  let result;
+
+  try {
+    const data = {
+      channel_name: channel,
+      filter
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("okex_monitor.spotChannel.unmonit", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/okex_monitor/spotChannel/unmonit`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.unmonitSpotChannel] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.unmonitSpotChannel] response:", JSON.stringify(result));
+  return result;
+}
+
+module.exports = {
+  monitSpotTrade,
+  unmonitSpotTrade,
+  monitSpotTicker,
+  unmonitSpotTicker,
+  monitSpotChannel,
+  unmonitSpotChannel
+};
+
+},{"./config":6,"./platform":10}],8:[function(require,module,exports){
 const platform = require("./platform");
 
 const config = require("./config");
@@ -680,11 +830,11 @@ async function getSpotTrade(options) {
       result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotTrade`, options);
     }
   } catch (error) {
-    console.log("[okex_utils.getSpotTrade] exception:", error);
+    config.logEnabled && console.log("[okex_utils.getSpotTrade] exception:", error);
     throw error;
   }
 
-  console.log("[okex_utils.getSpotTrade] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[okex_utils.getSpotTrade] response:", JSON.stringify(result));
   return result;
 }
 
@@ -698,11 +848,11 @@ async function getSpotTicker(options) {
       result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotTicker`, options);
     }
   } catch (error) {
-    console.log("[okex_utils.getSpotTicker] exception:", JSON.stringify(result));
+    config.logEnabled && console.log("[okex_utils.getSpotTicker] exception:", JSON.stringify(result));
     throw error;
   }
 
-  console.log("[okex_utils.getSpotTicker] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[okex_utils.getSpotTicker] response:", JSON.stringify(result));
   return result;
 }
 
@@ -716,11 +866,11 @@ async function getSpotCandles(options) {
       result = await platform.postremote(`${config.hostname}/api/okex_utils/getSpotCandles`, options);
     }
   } catch (error) {
-    console.log("[okex_utils.getSpotCandles] exception:", error);
+    config.logEnabled && console.log("[okex_utils.getSpotCandles] exception:", error);
     throw error;
   }
 
-  console.log("[okex_utils.getSpotCandles] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[okex_utils.getSpotCandles] response:", JSON.stringify(result));
   return result;
 }
 
@@ -730,7 +880,7 @@ module.exports = {
   getSpotCandles
 };
 
-},{"./config":6,"./platform":9}],8:[function(require,module,exports){
+},{"./config":6,"./platform":10}],9:[function(require,module,exports){
 "use strict";
 
 const Observable = require("./observable");
@@ -927,7 +1077,7 @@ module.exports = {
   removeOnce
 };
 
-},{"../config":6,"./index":9,"./observable":10,"socket.io-client":73}],9:[function(require,module,exports){
+},{"../config":6,"./index":10,"./observable":11,"socket.io-client":74}],10:[function(require,module,exports){
 "use strict"; // const axios = require("axios");
 
 function isWebPlatform() {
@@ -1029,7 +1179,7 @@ module.exports = {
   calllocal
 };
 
-},{"axios":15}],10:[function(require,module,exports){
+},{"axios":16}],11:[function(require,module,exports){
 "use strict";
 
 function Observable() {
@@ -1155,7 +1305,7 @@ Observable.prototype.emit = function (eventName, body) {
 
 module.exports = Observable;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 const platform = require("./platform");
 
 const config = require("./config");
@@ -1187,11 +1337,11 @@ async function generate(options, account) {
       result = await platform.postremote(`${config.hostname}/api/take_order/gen`, data);
     }
   } catch (error) {
-    console.log("[takeorder.generate] exception:", error);
+    config.logEnabled && console.log("[takeorder.generate] exception:", error);
     throw error;
   }
 
-  console.log("[takeorder.generate] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[takeorder.generate] response:", JSON.stringify(result));
   return result;
 }
 
@@ -1209,11 +1359,11 @@ async function start(oids) {
       result = await platform.postremote(`${config.hostname}/api/take_order`, data);
     }
   } catch (error) {
-    console.log("[takeorder.start] exception:", error);
+    config.logEnabled && console.log("[takeorder.start] exception:", error);
     throw error;
   }
 
-  console.log("[takeorder.start] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[takeorder.start] response:", JSON.stringify(result));
   return result;
 }
 
@@ -1222,7 +1372,7 @@ module.exports = {
   start
 };
 
-},{"./config":6,"./platform":9}],12:[function(require,module,exports){
+},{"./config":6,"./platform":10}],13:[function(require,module,exports){
 const platform = require("./platform");
 
 const config = require("./config");
@@ -1237,11 +1387,11 @@ async function getAll() {
       result = await platform.getremote(`${config.hostname}/api/user/all`);
     }
   } catch (error) {
-    console.log("[user.getAll] exception:", error);
+    config.logEnabled && console.log("[user.getAll] exception:", error);
     throw error;
   }
 
-  console.log("[user.getAll] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[user.getAll] response:", JSON.stringify(result));
   return result;
 }
 
@@ -1259,11 +1409,11 @@ async function get(userId) {
       result = await platform.getremote(`${config.hostname}/api/user`, params);
     }
   } catch (error) {
-    console.log("[user.get] exception:", error);
+    config.logEnabled && console.log("[user.get] exception:", error);
     throw error;
   }
 
-  console.log("[user.get] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[user.get] response:", JSON.stringify(result));
   return result;
 }
 
@@ -1285,11 +1435,11 @@ async function add(groupName, name, httpKey, httpSecret, passphrase) {
       result = await platform.postremote(`${config.hostname}/api/user`, data);
     }
   } catch (error) {
-    console.log("[user.add] exception:", error);
+    config.logEnabled && console.log("[user.add] exception:", error);
     throw error;
   }
 
-  console.log("[user.add] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[user.add] response:", JSON.stringify(result));
   return result;
 }
 
@@ -1307,11 +1457,11 @@ async function remove(userId) {
       result = await platform.postremote(`${config.hostname}/api/user/remove`, data);
     }
   } catch (error) {
-    console.log("[user.remove] exception:", error);
+    config.logEnabled && console.log("[user.remove] exception:", error);
     throw error;
   }
 
-  console.log("[user.remove] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[user.remove] response:", JSON.stringify(result));
   return result;
 }
 
@@ -1342,11 +1492,11 @@ async function update(userId, {
       result = await platform.postremote(`${config.hostname}/api/user/update`, data);
     }
   } catch (error) {
-    console.log("[user.update] exception:", error);
+    config.logEnabled && console.log("[user.update] exception:", error);
     throw error;
   }
 
-  console.log("[user.update] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[user.update] response:", JSON.stringify(result));
   return result;
 }
 
@@ -1358,7 +1508,7 @@ module.exports = {
   remove
 };
 
-},{"./config":6,"./platform":9}],13:[function(require,module,exports){
+},{"./config":6,"./platform":10}],14:[function(require,module,exports){
 module.exports = after
 
 function after(count, callback, err_cb) {
@@ -1388,7 +1538,7 @@ function after(count, callback, err_cb) {
 
 function noop() {}
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /**
  * An abstraction for slicing an arraybuffer even when
  * ArrayBuffer.prototype.slice is not supported
@@ -1419,9 +1569,9 @@ module.exports = function(arraybuffer, start, end) {
   return result.buffer;
 };
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":17}],16:[function(require,module,exports){
+},{"./lib/axios":18}],17:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1605,7 +1755,7 @@ module.exports = function xhrAdapter(config) {
 };
 
 }).call(this,require('_process'))
-},{"../core/createError":23,"./../core/settle":26,"./../helpers/btoa":30,"./../helpers/buildURL":31,"./../helpers/cookies":33,"./../helpers/isURLSameOrigin":35,"./../helpers/parseHeaders":37,"./../utils":39,"_process":72}],17:[function(require,module,exports){
+},{"../core/createError":24,"./../core/settle":27,"./../helpers/btoa":31,"./../helpers/buildURL":32,"./../helpers/cookies":34,"./../helpers/isURLSameOrigin":36,"./../helpers/parseHeaders":38,"./../utils":40,"_process":73}],18:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -1659,7 +1809,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":18,"./cancel/CancelToken":19,"./cancel/isCancel":20,"./core/Axios":21,"./defaults":28,"./helpers/bind":29,"./helpers/spread":38,"./utils":39}],18:[function(require,module,exports){
+},{"./cancel/Cancel":19,"./cancel/CancelToken":20,"./cancel/isCancel":21,"./core/Axios":22,"./defaults":29,"./helpers/bind":30,"./helpers/spread":39,"./utils":40}],19:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1680,7 +1830,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -1739,14 +1889,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":18}],20:[function(require,module,exports){
+},{"./Cancel":19}],21:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./../defaults');
@@ -1827,7 +1977,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"./../defaults":28,"./../utils":39,"./InterceptorManager":22,"./dispatchRequest":24}],22:[function(require,module,exports){
+},{"./../defaults":29,"./../utils":40,"./InterceptorManager":23,"./dispatchRequest":25}],23:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1881,7 +2031,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":39}],23:[function(require,module,exports){
+},{"./../utils":40}],24:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -1901,7 +2051,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":25}],24:[function(require,module,exports){
+},{"./enhanceError":26}],25:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1989,7 +2139,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":20,"../defaults":28,"./../helpers/combineURLs":32,"./../helpers/isAbsoluteURL":34,"./../utils":39,"./transformData":27}],25:[function(require,module,exports){
+},{"../cancel/isCancel":21,"../defaults":29,"./../helpers/combineURLs":33,"./../helpers/isAbsoluteURL":35,"./../utils":40,"./transformData":28}],26:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2012,7 +2162,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -2040,7 +2190,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":23}],27:[function(require,module,exports){
+},{"./createError":24}],28:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2062,7 +2212,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":39}],28:[function(require,module,exports){
+},{"./../utils":40}],29:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2162,7 +2312,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":16,"./adapters/xhr":16,"./helpers/normalizeHeaderName":36,"./utils":39,"_process":72}],29:[function(require,module,exports){
+},{"./adapters/http":17,"./adapters/xhr":17,"./helpers/normalizeHeaderName":37,"./utils":40,"_process":73}],30:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -2175,7 +2325,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 // btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
@@ -2213,7 +2363,7 @@ function btoa(input) {
 
 module.exports = btoa;
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2281,7 +2431,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":39}],32:[function(require,module,exports){
+},{"./../utils":40}],33:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2297,7 +2447,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2352,7 +2502,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":39}],34:[function(require,module,exports){
+},{"./../utils":40}],35:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2368,7 +2518,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2438,7 +2588,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":39}],36:[function(require,module,exports){
+},{"./../utils":40}],37:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -2452,7 +2602,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":39}],37:[function(require,module,exports){
+},{"../utils":40}],38:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2507,7 +2657,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":39}],38:[function(require,module,exports){
+},{"./../utils":40}],39:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2536,7 +2686,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -2841,7 +2991,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":29,"is-buffer":67}],40:[function(require,module,exports){
+},{"./helpers/bind":30,"is-buffer":68}],41:[function(require,module,exports){
 
 /**
  * Expose `Backoff`.
@@ -2928,7 +3078,7 @@ Backoff.prototype.setJitter = function(jitter){
 };
 
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 /*
  * base64-arraybuffer
  * https://github.com/niklasvh/base64-arraybuffer
@@ -2997,7 +3147,7 @@ Backoff.prototype.setJitter = function(jitter){
   };
 })();
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -3150,7 +3300,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 /**
  * Create a blob builder even when vendor prefixes exist
  */
@@ -3252,9 +3402,9 @@ module.exports = (function() {
   }
 })();
 
-},{}],44:[function(require,module,exports){
-
 },{}],45:[function(require,module,exports){
+
+},{}],46:[function(require,module,exports){
 (function (Buffer){
 /*!
  * The buffer module from node.js, for the browser.
@@ -5035,7 +5185,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"base64-js":42,"buffer":45,"ieee754":65}],46:[function(require,module,exports){
+},{"base64-js":43,"buffer":46,"ieee754":66}],47:[function(require,module,exports){
 /**
  * Slice reference.
  */
@@ -5060,7 +5210,7 @@ module.exports = function(obj, fn){
   }
 };
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 
 /**
  * Expose `Emitter`.
@@ -5225,7 +5375,7 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 
 module.exports = function(a, b){
   var fn = function(){};
@@ -5233,7 +5383,7 @@ module.exports = function(a, b){
   a.prototype = new fn;
   a.prototype.constructor = a;
 };
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 (function (process){
 /**
  * This is the web browser implementation of `debug()`.
@@ -5432,7 +5582,7 @@ function localstorage() {
 }
 
 }).call(this,require('_process'))
-},{"./debug":50,"_process":72}],50:[function(require,module,exports){
+},{"./debug":51,"_process":73}],51:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -5659,7 +5809,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":69}],51:[function(require,module,exports){
+},{"ms":70}],52:[function(require,module,exports){
 
 module.exports = require('./socket');
 
@@ -5671,7 +5821,7 @@ module.exports = require('./socket');
  */
 module.exports.parser = require('engine.io-parser');
 
-},{"./socket":52,"engine.io-parser":60}],52:[function(require,module,exports){
+},{"./socket":53,"engine.io-parser":61}],53:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -6419,7 +6569,7 @@ Socket.prototype.filterUpgrades = function (upgrades) {
   return filteredUpgrades;
 };
 
-},{"./transport":53,"./transports/index":54,"component-emitter":47,"debug":49,"engine.io-parser":60,"indexof":66,"parseqs":70,"parseuri":71}],53:[function(require,module,exports){
+},{"./transport":54,"./transports/index":55,"component-emitter":48,"debug":50,"engine.io-parser":61,"indexof":67,"parseqs":71,"parseuri":72}],54:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -6581,7 +6731,7 @@ Transport.prototype.onClose = function () {
   this.emit('close');
 };
 
-},{"component-emitter":47,"engine.io-parser":60}],54:[function(require,module,exports){
+},{"component-emitter":48,"engine.io-parser":61}],55:[function(require,module,exports){
 /**
  * Module dependencies
  */
@@ -6636,7 +6786,7 @@ function polling (opts) {
   }
 }
 
-},{"./polling-jsonp":55,"./polling-xhr":56,"./websocket":58,"xmlhttprequest-ssl":59}],55:[function(require,module,exports){
+},{"./polling-jsonp":56,"./polling-xhr":57,"./websocket":59,"xmlhttprequest-ssl":60}],56:[function(require,module,exports){
 (function (global){
 /**
  * Module requirements.
@@ -6879,7 +7029,7 @@ JSONPPolling.prototype.doWrite = function (data, fn) {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./polling":57,"component-inherit":48}],56:[function(require,module,exports){
+},{"./polling":58,"component-inherit":49}],57:[function(require,module,exports){
 /* global attachEvent */
 
 /**
@@ -7296,7 +7446,7 @@ function unloadHandler () {
   }
 }
 
-},{"./polling":57,"component-emitter":47,"component-inherit":48,"debug":49,"xmlhttprequest-ssl":59}],57:[function(require,module,exports){
+},{"./polling":58,"component-emitter":48,"component-inherit":49,"debug":50,"xmlhttprequest-ssl":60}],58:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -7543,7 +7693,7 @@ Polling.prototype.uri = function () {
   return schema + '://' + (ipv6 ? '[' + this.hostname + ']' : this.hostname) + port + this.path + query;
 };
 
-},{"../transport":53,"component-inherit":48,"debug":49,"engine.io-parser":60,"parseqs":70,"xmlhttprequest-ssl":59,"yeast":82}],58:[function(require,module,exports){
+},{"../transport":54,"component-inherit":49,"debug":50,"engine.io-parser":61,"parseqs":71,"xmlhttprequest-ssl":60,"yeast":83}],59:[function(require,module,exports){
 (function (Buffer){
 /**
  * Module dependencies.
@@ -7840,7 +7990,7 @@ WS.prototype.check = function () {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../transport":53,"buffer":45,"component-inherit":48,"debug":49,"engine.io-parser":60,"parseqs":70,"ws":44,"yeast":82}],59:[function(require,module,exports){
+},{"../transport":54,"buffer":46,"component-inherit":49,"debug":50,"engine.io-parser":61,"parseqs":71,"ws":45,"yeast":83}],60:[function(require,module,exports){
 // browser shim for xmlhttprequest module
 
 var hasCORS = require('has-cors');
@@ -7879,7 +8029,7 @@ module.exports = function (opts) {
   }
 };
 
-},{"has-cors":64}],60:[function(require,module,exports){
+},{"has-cors":65}],61:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -8486,7 +8636,7 @@ exports.decodePayloadAsBinary = function (data, binaryType, callback) {
   });
 };
 
-},{"./keys":61,"./utf8":62,"after":13,"arraybuffer.slice":14,"base64-arraybuffer":41,"blob":43,"has-binary2":63}],61:[function(require,module,exports){
+},{"./keys":62,"./utf8":63,"after":14,"arraybuffer.slice":15,"base64-arraybuffer":42,"blob":44,"has-binary2":64}],62:[function(require,module,exports){
 
 /**
  * Gets the keys for an object.
@@ -8507,7 +8657,7 @@ module.exports = Object.keys || function keys (obj){
   return arr;
 };
 
-},{}],62:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 /*! https://mths.be/utf8js v2.1.2 by @mathias */
 
 var stringFromCharCode = String.fromCharCode;
@@ -8719,7 +8869,7 @@ module.exports = {
 	decode: utf8decode
 };
 
-},{}],63:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 (function (Buffer){
 /* global Blob File */
 
@@ -8787,7 +8937,7 @@ function hasBinary (obj) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":45,"isarray":68}],64:[function(require,module,exports){
+},{"buffer":46,"isarray":69}],65:[function(require,module,exports){
 
 /**
  * Module exports.
@@ -8806,7 +8956,7 @@ try {
   module.exports = false;
 }
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -8892,7 +9042,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -8903,7 +9053,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -8926,14 +9076,14 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -9087,7 +9237,7 @@ function plural(ms, n, name) {
   return Math.ceil(ms / n) + ' ' + name + 's';
 }
 
-},{}],70:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 /**
  * Compiles a querystring
  * Returns string representation of the object
@@ -9126,7 +9276,7 @@ exports.decode = function(qs){
   return qry;
 };
 
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 /**
  * Parses an URI
  *
@@ -9167,7 +9317,7 @@ module.exports = function parseuri(str) {
     return uri;
 };
 
-},{}],72:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -9353,7 +9503,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],73:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -9449,7 +9599,7 @@ exports.connect = lookup;
 exports.Manager = require('./manager');
 exports.Socket = require('./socket');
 
-},{"./manager":74,"./socket":76,"./url":77,"debug":49,"socket.io-parser":79}],74:[function(require,module,exports){
+},{"./manager":75,"./socket":77,"./url":78,"debug":50,"socket.io-parser":80}],75:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -10024,7 +10174,7 @@ Manager.prototype.onreconnect = function () {
   this.emitAll('reconnect', attempt);
 };
 
-},{"./on":75,"./socket":76,"backo2":40,"component-bind":46,"component-emitter":47,"debug":49,"engine.io-client":51,"indexof":66,"socket.io-parser":79}],75:[function(require,module,exports){
+},{"./on":76,"./socket":77,"backo2":41,"component-bind":47,"component-emitter":48,"debug":50,"engine.io-client":52,"indexof":67,"socket.io-parser":80}],76:[function(require,module,exports){
 
 /**
  * Module exports.
@@ -10050,7 +10200,7 @@ function on (obj, ev, fn) {
   };
 }
 
-},{}],76:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -10490,7 +10640,7 @@ Socket.prototype.binary = function (binary) {
   return this;
 };
 
-},{"./on":75,"component-bind":46,"component-emitter":47,"debug":49,"has-binary2":63,"parseqs":70,"socket.io-parser":79,"to-array":81}],77:[function(require,module,exports){
+},{"./on":76,"component-bind":47,"component-emitter":48,"debug":50,"has-binary2":64,"parseqs":71,"socket.io-parser":80,"to-array":82}],78:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -10567,7 +10717,7 @@ function url (uri, loc) {
   return obj;
 }
 
-},{"debug":49,"parseuri":71}],78:[function(require,module,exports){
+},{"debug":50,"parseuri":72}],79:[function(require,module,exports){
 /*global Blob,File*/
 
 /**
@@ -10710,7 +10860,7 @@ exports.removeBlobs = function(data, callback) {
   }
 };
 
-},{"./is-buffer":80,"isarray":68}],79:[function(require,module,exports){
+},{"./is-buffer":81,"isarray":69}],80:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -11127,7 +11277,7 @@ function error(msg) {
   };
 }
 
-},{"./binary":78,"./is-buffer":80,"component-emitter":47,"debug":49,"isarray":68}],80:[function(require,module,exports){
+},{"./binary":79,"./is-buffer":81,"component-emitter":48,"debug":50,"isarray":69}],81:[function(require,module,exports){
 (function (Buffer){
 
 module.exports = isBuf;
@@ -11151,7 +11301,7 @@ function isBuf(obj) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":45}],81:[function(require,module,exports){
+},{"buffer":46}],82:[function(require,module,exports){
 module.exports = toArray
 
 function toArray(list, index) {
@@ -11166,7 +11316,7 @@ function toArray(list, index) {
     return array
 }
 
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 'use strict';
 
 var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('')

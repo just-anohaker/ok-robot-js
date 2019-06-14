@@ -9,5 +9,6 @@ module.exports = {
     auto_market: require("./lib/auto_market"),
     batch_order: require("./lib/batch_order"),
     take_order: require("./lib/take_order"),
-    okex_utils: require("./lib/okex_utils")
+    okex_utils: require("./lib/okex_utils"),
+    okex_monitor: require("./lib/okex_monitor")
 };
