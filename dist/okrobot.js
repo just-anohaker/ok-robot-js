@@ -807,6 +807,13 @@ module.exports = {
 const platform = require("./platform");
 
 const config = require("./config");
+/**
+ * 
+ * @param {object} options 
+ * @param {string} options.instrument_id - 交易对
+ * @param {object} options.params - 附加参数[可选]
+ */
+
 
 async function getSpotTrade(options) {
   let result;
@@ -825,6 +832,12 @@ async function getSpotTrade(options) {
   config.logEnabled && console.log("[okex_utils.getSpotTrade] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {object} options 
+ * @param {string} options.instrument_id - 交易对
+ */
+
 
 async function getSpotTicker(options) {
   let result;
@@ -843,6 +856,13 @@ async function getSpotTicker(options) {
   config.logEnabled && console.log("[okex_utils.getSpotTicker] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {object} options 
+ * @param {string} options.instrument_id - 交易对
+ * @param {object} options.params - 附加参数[可选]
+ */
+
 
 async function getSpotCandles(options) {
   let result;
@@ -861,6 +881,15 @@ async function getSpotCandles(options) {
   config.logEnabled && console.log("[okex_utils.getSpotCandles] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {object} account 
+ * @param {string} account.httpkey
+ * @param {string} account.httpsecret
+ * @param {string} account.passphrase
+ * @param {array<string>} currencyFilter - 钱包名称列表,例如:["ETM", "USDT", "USDK"]表示需要获取账号上ETM,USDT和USDK的信息 
+ */
+
 
 async function getWallet(account, currencyFilter) {
   let result;
@@ -884,6 +913,14 @@ async function getWallet(account, currencyFilter) {
   config.logEnabled && config.log("[okex_utils.getWallet] response:", JSON.stringify(result));
   return result;
 }
+/**
+ * 
+ * @param {object} account
+ * @param {string} account.httpkey
+ * @param {string} account.httpsecret
+ * @param {string} account.passphrase
+ */
+
 
 async function getWalletList(account) {
   let result;
