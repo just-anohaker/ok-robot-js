@@ -589,6 +589,29 @@ async function getOrderData(options, account) {
   return result;
 }
 
+async function toBatchOrder(options, account) {
+  let result;
+
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.toBatchOrder", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/toBatchOrder`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[batchorder.toBatchOrder] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[batchorder.toBatchOrder] response:", JSON.stringify(result));
+  return result;
+}
+
 module.exports = {
   generate,
   // start,
@@ -598,7 +621,8 @@ module.exports = {
   icebergOrder,
   startDepInfo,
   stopDepInfo,
-  getOrderData
+  getOrderData,
+  toBatchOrder
 };
 
 },{"./config":6,"./platform":10}],6:[function(require,module,exports){
