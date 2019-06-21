@@ -812,7 +812,53 @@ async function unmonitSpotDepth(account, instrument_id) {
     throw error;
   }
 
-  config.logEnabled && config.log("[okex_monitor.unmonitSpotDepth] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[okex_monitor.unmonitSpotDepth] response:", JSON.stringify(result));
+  return result;
+}
+
+async function monitSpotWallet(account, currency) {
+  let result;
+
+  try {
+    const data = {
+      account,
+      currency
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = platform.calllocal("okex_monitor.spotWallet", data);
+    } else {
+      result = platform.postremote(`${config.hostname}/api/okex_monitor/spotWallet`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.monitSpotWallet] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.monitSpotWallet] response:", JSON.stringify(result));
+  return result;
+}
+
+async function unmonitSpotWallet(account, currency) {
+  let result;
+
+  try {
+    const data = {
+      account,
+      currency
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = platform.calllocal("okex_monitor.spotWallet.unmonit", data);
+    } else {
+      result = platform.postremote(`${config.hostname}/api/okex_monitor/spotWallet/unmonit`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[okex_monitor.unmonitSpotWallet] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[okex_monitor.unmonitSpotWallet] response:", JSON.stringify(result));
   return result;
 }
 
@@ -824,7 +870,9 @@ module.exports = {
   monitSpotChannel,
   unmonitSpotChannel,
   monitSpotDepth,
-  unmonitSpotDepth
+  unmonitSpotDepth,
+  monitSpotWallet,
+  unmonitSpotWallet
 };
 
 },{"./config":6,"./platform":10}],8:[function(require,module,exports){
