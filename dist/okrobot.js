@@ -982,7 +982,7 @@ async function getWallet(account, currencyFilter) {
     throw error;
   }
 
-  config.logEnabled && config.log("[okex_utils.getWallet] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[okex_utils.getWallet] response:", JSON.stringify(result));
   return result;
 }
 /**
@@ -1012,7 +1012,7 @@ async function getWalletList(account) {
     throw error;
   }
 
-  config.logEnabled && config.log("[okex_utils.getWalletList] response:", JSON.stringify(result));
+  config.logEnabled && console.log("[okex_utils.getWalletList] response:", JSON.stringify(result));
   return result;
 }
 
