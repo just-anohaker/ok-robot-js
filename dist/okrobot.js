@@ -659,6 +659,52 @@ async function addWarnings(options, account) {
   return result;
 }
 
+async function removeWarnings(options, account) {
+  let result;
+
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.removeWarnings", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/removeWarnings`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[batchorder.removeWarnings] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[batchorder.removeWarnings] response:", JSON.stringify(result));
+  return result;
+}
+
+async function isWarnings(options, account) {
+  let result;
+
+  try {
+    const data = {
+      options,
+      account
+    };
+
+    if (platform.isElectronPlatform()) {
+      result = await platform.calllocal("batchorder.isWarnings", data);
+    } else {
+      result = await platform.postremote(`${config.hostname}/api/batch_order/isWarnings`, data);
+    }
+  } catch (error) {
+    config.logEnabled && console.log("[batchorder.isWarnings] exception:", error);
+    throw error;
+  }
+
+  config.logEnabled && console.log("[batchorder.isWarnings] response:", JSON.stringify(result));
+  return result;
+}
+
 async function startWarnings(options, account) {
   let result;
 
@@ -740,6 +786,8 @@ module.exports = {
   getOrderData,
   toBatchOrder,
   addWarnings,
+  removeWarnings,
+  isWarnings,
   startWarnings,
   stopWarnings,
   listWarnings
