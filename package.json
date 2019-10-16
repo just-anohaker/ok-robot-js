@@ -6,7 +6,7 @@
   "scripts": {
     "browserify": "npx browserify build.js -o ./dist/okrobot.js -t [ babelify --presets[@babel/preset-env]]",
     "uglify": "npx uglifyjs ./dist/okrobot.js -o ./dist/okrobot-min.js",
-    "dist": "npm run browserify && npm run uglify"
+    "build:dist": "npm run browserify && npm run uglify"
   },
   "keywords": [],
   "author": "",
