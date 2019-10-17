@@ -1822,8 +1822,6 @@ module.exports = {
 };
 
 },{"./config":6,"./platform":10}],14:[function(require,module,exports){
-const platform = require("./platform");
-
 const config = require("./config");
 
 async function native_call(channel, data = undefined) {
@@ -1869,12 +1867,17 @@ async function retrieveFileData(filepath) {
   return result;
 }
 
+async function isElectronPlatform() {
+  return window !== undefined && window.ipcNative !== undefined;
+}
+
 module.exports = {
   openFileDialog,
-  retrieveFileData
+  retrieveFileData,
+  isElectronPlatform
 };
 
-},{"./config":6,"./platform":10}],15:[function(require,module,exports){
+},{"./config":6}],15:[function(require,module,exports){
 module.exports = after
 
 function after(count, callback, err_cb) {
